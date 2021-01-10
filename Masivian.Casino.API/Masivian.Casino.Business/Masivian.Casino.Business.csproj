@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Masivian.Casino.Data\Masivian.Casino.Data.csproj" />
+    <ProjectReference Include="..\Masivian.Casino.Entity\Masivian.Casino.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

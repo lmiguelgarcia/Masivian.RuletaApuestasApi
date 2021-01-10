@@ -4,12 +4,22 @@ namespace Masivian.Casino.Data.DbContext
 {
     public class CasinoContext : ICasinoContext
     {
+        #region Properties
         private readonly ConnectionMultiplexer _redisConnection;
+        #endregion
+
+        #region Constructor
         public CasinoContext(ConnectionMultiplexer redisConnection)
         {
             _redisConnection = redisConnection;
-            Redis = redisConnection.GetDatabase();
+            RedisDatabase = redisConnection.GetDatabase();
+            RedisServer = redisConnection.GetServer(redisConnection.Configuration);
         }
-        public IDatabase Redis { get; }
+        #endregion
+
+        #region Methods
+        public IDatabase RedisDatabase { get; }
+        public IServer RedisServer { get; }
+        #endregion
     }
 }

@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Masivian.Casino.Business\Masivian.Casino.Business.csproj" />
+    <ProjectReference Include="..\Masivian.Casino.Data\Masivian.Casino.Data.csproj" />
+    <ProjectReference Include="..\Masivian.Casino.Entity\Masivian.Casino.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

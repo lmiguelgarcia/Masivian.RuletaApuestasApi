@@ -3,6 +3,7 @@ namespace Masivian.Casino.Data.DbContext.Interfaces
 {
     public interface ICasinoContext
     {
-        IDatabase Redis { get; }
+        IDatabase RedisDatabase { get; }
+        IServer RedisServer { get; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using Masivian.Casino.Entity.DTO;
+
 namespace Masivian.Casino.Entity
 {
     public class NumericalBet : Bet
@@ -11,6 +13,26 @@ namespace Masivian.Casino.Entity
             : base(user, date, money)
         {
             this.Number = number;
+        }
+        #endregion
+        #region Methods
+        public override void CheckWinner(int randomWinnerNumber)
+        {
+            this.IsWinner = this.Number == randomWinnerNumber;
+        }
+
+        public override BetResult GetResult()
+        {
+            double moneyFactor = 5;
+
+            return new BetResult()
+            {
+                BetType = "NumericalBet",
+                Bet = this.Number.ToString(),
+                MoneyBet = this.Money,
+                MoneyWon = this.Money * moneyFactor,
+                User = this.User
+            };
         }
         #endregion
     }

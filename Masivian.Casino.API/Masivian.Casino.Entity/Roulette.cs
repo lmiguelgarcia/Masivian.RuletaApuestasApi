@@ -5,20 +5,23 @@ namespace Masivian.Casino.Entity
     public class Roulette
     {
         #region Properties
+        public enum StatusRoulette
+        {
+            Created,
+            Opened,
+            Closed
+        };
         public string Id { get; }
-        public string State { get; set; }
-        public DateTime OpeningDate { get; }
+        public StatusRoulette Status { get; set; }
+        public DateTime OpeningDate { get; set; }
         public DateTime ClosingDate { get; set; }
         public List<Bet> Bets { get; set; }
-        public int WinnersNumber { get; set; }
+        public int WinnerNumber { get; set; }
         #endregion
         #region Constructor
-        public Roulette(string id, string state, DateTime openingDate)
+        public Roulette(string id)
         {
             this.Id = id;
-            this.State = state;
-            this.OpeningDate = openingDate;
-            this.Bets = new List<Bet>();
         }
         #endregion
     }

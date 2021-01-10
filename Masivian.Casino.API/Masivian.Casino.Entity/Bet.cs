@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Masivian.Casino.Entity.DTO;
+using System;
 namespace Masivian.Casino.Entity
 {
-    public class Bet
+    public abstract class Bet
     {
         #region Properties
         public string User { get; }
@@ -16,6 +17,9 @@ namespace Masivian.Casino.Entity
             this.Date = date;
             this.Money = money;
         }
+
+        public abstract void CheckWinner(int randomWinnerNumber);
+        public abstract BetResult GetResult();
         #endregion
     }
 }
