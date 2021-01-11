@@ -2,6 +2,7 @@
 using Masivian.Casino.Data.Repositories.Interfaces;
 using Masivian.Casino.Entity;
 using Masivian.Casino.Entity.DTO;
+using Masivian.Casino.Entity.ENUM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Masivian.Casino.Business
             {
                 OpeningDate = DateTime.UtcNow,
                 Bets = new List<Bet>(),
-                Status = Roulette.StatusRoulette.Created
+                Status = RouletteStatus.Created
             };
             roulette = await _repository.UpdateRoulette(roulette);
 
@@ -46,11 +47,11 @@ namespace Masivian.Casino.Business
             var roulette = await _repository.GetRouletteById(id);
             if (roulette == null)
                 throw new Exception("La Ruleta no existe");
-            if (roulette.Status == Roulette.StatusRoulette.Opened)
+            if (roulette.Status == RouletteStatus.Opened)
                 throw new Exception("La Ruleta ya se encuentra abierta");
-            if (roulette.Status == Roulette.StatusRoulette.Closed)
+            if (roulette.Status == RouletteStatus.Closed)
                 throw new Exception("La Ruleta ya se encuentra cerrada");
-            roulette.Status = Roulette.StatusRoulette.Opened;
+            roulette.Status = RouletteStatus.Opened;
             await _repository.UpdateRoulette(roulette);
 
             return "La ruleta ha sido abierta correctamente";
@@ -60,14 +61,14 @@ namespace Masivian.Casino.Business
         {
             ValidateInputBet(betRequest);
             Bet bet;
-            if (betRequest.Type == BetRequest.BetType.Numerical)
+            if (betRequest.Type == BetType.Numerical)
                 bet = new NumericalBet(betRequest.User, DateTime.UtcNow, betRequest.Money, int.Parse(betRequest.Bet));
             else
                 bet = new ColorBet(betRequest.User, DateTime.UtcNow, betRequest.Money, betRequest.Bet);
             var roulette = await _repository.GetRouletteById(betRequest.RouletteId);
             if (roulette == null)
                 throw new Exception(string.Format("La Ruleta con id {0} no existe", betRequest.RouletteId));
-            if (roulette.Status != Roulette.StatusRoulette.Opened)
+            if (roulette.Status != RouletteStatus.Opened)
                 throw new Exception("No se puede realizar la apuesta, la Ruleta no ha sido abierta");
             roulette.Bets.Add(bet);
             await _repository.UpdateRoulette(roulette);
@@ -80,12 +81,12 @@ namespace Masivian.Casino.Business
             var roulette = await _repository.GetRouletteById(id);
             if (roulette == null)
                 throw new Exception("La Ruleta no existe");
-            if (roulette.Status == Roulette.StatusRoulette.Closed)
+            if (roulette.Status == RouletteStatus.Closed)
                 throw new Exception("La Ruleta ya se encuentra cerrada");
             int randomNumber = GenerateRandomWinnerNumber();
             roulette.WinnerNumber = randomNumber;
             roulette.ClosingDate = DateTime.UtcNow;
-            roulette.Status = Roulette.StatusRoulette.Closed;
+            roulette.Status = RouletteStatus.Closed;
             foreach (var bet in roulette.Bets)
                 bet.CheckWinner(randomNumber);
             await _repository.UpdateRoulette(roulette);
@@ -93,12 +94,12 @@ namespace Masivian.Casino.Business
             return GetResultFromRoulette(roulette);
         }
 
-        public async Task<List<RouletteStatus>> GetRoulettes()
+        public async Task<List<RouletteDetail>> GetRoulettes()
         {
             var roulettes = await _repository.GetRoulettes();
 
             return roulettes
-                .Select(g => new RouletteStatus { Id = g.Id, Status = ((Roulette.StatusRoulette)g.Status).ToString() }).ToList();
+                .Select(g => new RouletteDetail { Id = g.Id, Status = ((RouletteStatus)g.Status).ToString() }).ToList();
         }
 
         private RouletteResult GetResultFromRoulette(Roulette roulette)
@@ -117,12 +118,12 @@ namespace Masivian.Casino.Business
 
         private void ValidateInputBet(BetRequest betRequest)
         {
-            if (!Enum.IsDefined(typeof(BetRequest.BetType), betRequest.Type))
+            if (!Enum.IsDefined(typeof(BetType), betRequest.Type))
                 throw new Exception("No existe el tipo de apuesta. Los tipos de apuesta validos son 1: Numerico y 2: Color");
             if (betRequest.Money < MIN_MONEY_BET || betRequest.Money > MAX_MONEY_BET)
                 throw new Exception(string.Format
                     ("El rango valido para el valor de la apuesta es de {0} a {1} dolares", MIN_MONEY_BET, MAX_MONEY_BET));
-            if (betRequest.Type == BetRequest.BetType.Numerical)
+            if (betRequest.Type == BetType.Numerical)
             {
                 if (!int.TryParse(betRequest.Bet, out int betNumber))
                     throw new Exception("El valor de la apuesta numerica no es valido");

@@ -10,6 +10,6 @@ namespace Masivian.Casino.Business.Interfaces
         Task<string> OpenRouletteByIdAsync(string id);
         Task<string> CreateBet(BetRequest betRequest);
         Task<RouletteResult> ClosedRouletteById(string id);
-        Task<List<RouletteStatus>> GetRoulettes();
+        Task<List<RouletteDetail>> GetRoulettes();
     }
 }

@@ -1,15 +1,11 @@
-﻿using System.Text.Json.Serialization;
+﻿using Masivian.Casino.Entity.ENUM;
+using System.Text.Json.Serialization;
 
 namespace Masivian.Casino.Entity.DTO
 {
     public class BetRequest
     {
-        #region Properties
-        public enum BetType
-        {
-            Numerical = 1,
-            Color = 2
-        }
+        #region Properties        
         public string RouletteId { get; set; }
         public BetType Type { get; set; }
         public string Bet { get; set; }

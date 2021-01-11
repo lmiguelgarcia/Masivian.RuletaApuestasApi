@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Masivian.Casino.Business.Interfaces;
+﻿using Masivian.Casino.Business.Interfaces;
 using Masivian.Casino.Entity.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Masivian.Casino.API.Controllers
 {
@@ -98,8 +97,8 @@ namespace Masivian.Casino.API.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        [ProducesResponseType(typeof(List<RouletteStatus>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<List<RouletteStatus>>> GetRoulettes()
+        [ProducesResponseType(typeof(List<RouletteDetail>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<List<RouletteDetail>>> GetRoulettes()
         {
             try
             {

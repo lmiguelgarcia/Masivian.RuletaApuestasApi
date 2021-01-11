@@ -1,6 +1,6 @@
 ﻿namespace Masivian.Casino.Entity.DTO
 {
-    public class RouletteStatus
+    public class RouletteDetail
     {
         #region Properties
         public string Id { get; set; }
