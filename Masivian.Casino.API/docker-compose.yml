@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  casinodb:
+    image: redis
+
+  masivian.casino.api:
+    image: ${DOCKER_REGISTRY-}masiviancasinoapi
+    build:
+      context: .
+      dockerfile: Masivian.Casino.API/Dockerfile

@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  casinodb:
+    container_name: casinodb
+    restart: always        
+    ports:
+      - "6379:6379"
+
+  masivian.casino.api:
+    container_name: masiviancasinoapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:Redis=casinodb:6379"
+    depends_on:
+      - casinodb
+    ports:
+      - "8001:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

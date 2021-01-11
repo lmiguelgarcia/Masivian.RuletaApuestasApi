@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masivian.Casino.Entity", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masivian.Casino.Data", "Masivian.Casino.Data\Masivian.Casino.Data.csproj", "{77E5F9D4-B55C-4C0B-8FF1-823381E6169C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masivian.Casino.Business", "Masivian.Casino.Business\Masivian.Casino.Business.csproj", "{4A909AAF-A224-4B51-B2FD-AE9066697FE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masivian.Casino.Business", "Masivian.Casino.Business\Masivian.Casino.Business.csproj", "{4A909AAF-A224-4B51-B2FD-AE9066697FE8}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{68100DA1-EB77-46A4-95A9-F4DCFC75C23F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4A909AAF-A224-4B51-B2FD-AE9066697FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A909AAF-A224-4B51-B2FD-AE9066697FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A909AAF-A224-4B51-B2FD-AE9066697FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68100DA1-EB77-46A4-95A9-F4DCFC75C23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68100DA1-EB77-46A4-95A9-F4DCFC75C23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68100DA1-EB77-46A4-95A9-F4DCFC75C23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68100DA1-EB77-46A4-95A9-F4DCFC75C23F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
